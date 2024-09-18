@@ -1,5 +1,5 @@
 <template>
-	<div class="max-w-md mx-auto bg-white p-8 border border-gray-300 rounded-lg shadow-md">
+	<div class="max-w-md mx-auto w-full bg-white p-8 border border-gray-300 rounded-lg shadow-md">
 		<h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
 		<form @submit.prevent="handleSubmit">
 			<div class="mb-4">
@@ -37,12 +37,8 @@ import { registerUser } from "~/services/authService";
 const user = ref({
 	name: "",
 	email: "",
-	passwordHash: "", // Use 'passwordHash' to match your API
-	roleID: 0, // Default value, adjust if needed
-	role: {
-		roleID: 0,
-		roleName: "string",
-	},
+	passwordHash: "",
+	role: 1,
 });
 
 // Reactive reference for error message

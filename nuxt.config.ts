@@ -2,12 +2,14 @@
 export default defineNuxtConfig({
 	compatibilityDate: "2024-04-03",
 	devtools: { enabled: true },
+
 	runtimeConfig: {
 		public: {
 			apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || "http://localhost:5155", // Use default if not set
 		},
 	},
 	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
+
 	googleFonts: {
 		families: {
 			Poppins: [400, 500, 600, 700],

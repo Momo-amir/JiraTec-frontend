@@ -1,12 +1,6 @@
 <template>
-	<NuxtLayout>
-		<header>
-			<Navbar />
-		</header>
-		<NuxtPage />
-	</NuxtLayout>
+	<templates-ui-lib />
 </template>
-
 <script setup lang="ts">
 definePageMeta({
 	middleware: ["auth"],
