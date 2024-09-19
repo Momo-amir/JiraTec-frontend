@@ -14,12 +14,7 @@
 				</div>
 				<div class="mb-4">
 					<label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-					<input type="text" id="description" v-model="newProject.description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required />
-				</div>
-
-				<div class="mb-4">
-					<label for="createdByName" class="block text-sm font-medium text-gray-700">Created By</label>
-					<input type="text" id="createdByName" v-model="newProject.createdByName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required disabled />
+					<textarea id="description" v-model="newProject.description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
 				</div>
 
 				<div class="flex justify-end">
@@ -33,69 +28,37 @@
 
 <script setup lang="ts">
 import { createProject } from "~/services/projectService";
-import { FetchUser } from "~/services/authService";
-import type { IProject } from "~/Interfaces/IProject"; // Import the IProject interface
+import { ref } from "vue";
 
 defineProps<{ isVisible: boolean }>();
 
-const emit = defineEmits(["close"]); // Emit close event to parent
+const emit = defineEmits(["close"]);
 
-// Reactive object to hold the form data
-const newProject = ref<IProject>({
-	description: "",
-	createdBy: {
-		userID: 0,
-		name: "",
-		email: "",
-		role: 0,
-	},
-	createdByName: "",
-	createdDate: "",
-	tasks: [],
-	users: [],
-	projectID: 0,
+const newProject = ref<{
+	title: string;
+	description: string;
+}>({
 	title: "",
+	description: "",
 });
 
 const closeModal = () => {
 	emit("close");
 };
 
-// Function to handle the form submission
 const handleSubmit = async () => {
-	const projectPayload: IProject = {
-		description: newProject.value.description,
-		createdBy: {
-			userID: newProject.value.createdBy.userID,
-			name: newProject.value.createdBy.name,
-			email: newProject.value.createdBy.email,
-			role: newProject.value.createdBy.role,
-		},
-		createdByName: newProject.value.createdByName,
-		createdDate: newProject.value.createdDate,
-		tasks: newProject.value.tasks,
-		users: [newProject.value.createdBy],
-		projectID: 0,
-		title: "",
-	};
-
-	// Log the request payload
-	console.log("Submitting project:", projectPayload);
-
-	// Call the create project service to create a new project
-	const createdProject = await createProject(projectPayload);
-};
-
-onMounted(async () => {
 	try {
-		const user = await FetchUser();
-		newProject.value.createdBy.userID = user.userID;
-		newProject.value.createdByName = user.name;
-		newProject.value.createdDate = new Date().toISOString(); // Set the current date in ISO 8601 format
-		newProject.value.tasks = []; // Initialize tasks as an empty array
-		newProject.value.users = [newProject.value.createdBy]; // Add the current user to the project
+		const projectPayload = {
+			title: newProject.value.title,
+			description: newProject.value.description,
+		};
+
+		const createdProject = await createProject(projectPayload);
+		console.log("Project created successfully", createdProject);
+
+		closeModal();
 	} catch (error) {
-		console.error("Failed to fetch user data:", error);
+		console.error("Failed to create project:", error);
 	}
-});
+};
 </script>

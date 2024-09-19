@@ -2,15 +2,15 @@
 <template>
 	<div>
 		<nav>
-			<div class="flex justify-between items-center mx-auto w-full bg-white border-b-slate-400 py-5">
+			<div class="flex justify-between items-center mx-auto w-full bg-white py-5 shadow-md">
 				<div>
-					<img alt="Logo" />
+					<nuxt-link to="/">
+						<img alt="Logo" />
+					</nuxt-link>
 				</div>
 				<div class="mr-4">
 					<ul class="flex gap-4">
-						<li class="hover:text-accent">
-							<nuxt-link to="/">Home</nuxt-link>
-						</li>
+						<li class="hover:text-accent"></li>
 
 						<li class="hover:text-accent">
 							<nuxt-link to="/UiLib">UI library</nuxt-link>
@@ -28,7 +28,7 @@
 		</nav>
 
 		<!-- Modal component -->
-		<Modal :isVisible="showModal" @close="showModal = false" @submit="createNewProject" />
+		<Modal :isVisible="showModal" @close="showModal = false" />
 	</div>
 </template>
 

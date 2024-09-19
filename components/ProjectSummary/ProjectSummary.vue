@@ -17,7 +17,7 @@
 						<td class="px-4 py-2 whitespace-nowrap">{{ project.createdByName }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">{{ formatDate(project.dueDate) }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">
-							<span :class="statusClass(project.status)">{{ project.status }}</span>
+							<span :class="statusClass(project.status)">{{ project.status || "N/A" }}</span>
 						</td>
 					</tr>
 				</tbody>
@@ -28,10 +28,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { getProjectsForUser } from "~/services/projectService";
-import { FetchUser } from "~/services/authService";
+import { getCurrentUserProjects } from "~/services/projectService";
 import type { IProject } from "~/Interfaces/IProject";
-import type { IUser } from "~/Interfaces/IUser";
 
 // State to store the projects data
 const projects = ref<IProject[]>([]);
@@ -39,11 +37,8 @@ const projects = ref<IProject[]>([]);
 // Function to load projects for the logged-in user
 const loadProjects = async () => {
 	try {
-		// Fetch the logged-in user
-		const user: IUser = await FetchUser();
-
-		// Fetch projects for the user
-		const fetchedProjects = await getProjectsForUser(user.userID);
+		// Fetch projects for the current user
+		const fetchedProjects = await getCurrentUserProjects();
 
 		projects.value = fetchedProjects;
 	} catch (error) {
@@ -62,7 +57,7 @@ function formatDate(date: string | undefined): string {
 }
 
 // Method to dynamically assign classes based on project status
-function statusClass(status: string): string {
+function statusClass(status: string | undefined): string {
 	switch (status) {
 		case "Completed":
 			return "text-green-500 font-bold";
