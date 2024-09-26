@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 			apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || "http://localhost:5155", // Use default if not set
 		},
 	},
-	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
+	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "@pinia/nuxt"],
 
 	googleFonts: {
 		families: {

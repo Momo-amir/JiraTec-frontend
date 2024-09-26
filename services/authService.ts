@@ -1,3 +1,4 @@
+import type { IUser } from "~/Interfaces/IUser";
 import type { ILoginResponse } from "~/Interfaces/ILoginResponse";
 import { fetchWithAuth } from "~/services/apiHelper";
 
@@ -77,4 +78,15 @@ export const FetchUser = async (): Promise<ILoginResponse> => {
 		console.error("Error fetching user:", error);
 		throw error;
 	}
+};
+
+export const getUserById = async (userId: number): Promise<IUser> => {
+	const config = useRuntimeConfig();
+	const { data, error } = await useFetch<IUser>(`${config.public.apiBaseUrl}User/${userId}`);
+
+	if (error.value) {
+		throw error.value;
+	}
+
+	return data.value as IUser;
 };

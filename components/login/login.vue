@@ -1,5 +1,5 @@
 <template>
-	<div class="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg shadow-md md:mx-0">
+	<div class="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg shadow-md md:mx-0 is this a cache issue?">
 		<h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
 		<form @submit.prevent="handleSubmit">
 			<div class="mb-4">
@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/auth"; // Adjust the import path as needed
 import { loginUser } from "~/services/authService";
 
 const user = ref({
@@ -32,16 +33,15 @@ const user = ref({
 });
 const errorMessage = ref("");
 
+const authStore = useAuthStore();
+
 const handleSubmit = async () => {
 	try {
 		const response = await loginUser(user.value);
 		console.log("User logged in:", response);
 
-		// Save the JWT token
-		localStorage.setItem("token", response.token); // Store the token
-
-		// Save user data to state
-		useState("user", () => response);
+		// Save the JWT token using the store
+		authStore.login(response.token);
 
 		// Redirect to the dashboard or other protected route
 		navigateTo("/");

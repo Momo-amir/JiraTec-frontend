@@ -12,7 +12,7 @@
 					</tr>
 				</thead>
 				<tbody class="bg-white divide-y divide-gray-200">
-					<tr v-for="project in projects" :key="project.projectID">
+					<tr v-for="project in projects" :key="project.projectID" @click="goToProject(project.projectID)" class="cursor-pointer hover:bg-gray-100">
 						<td class="px-4 py-2 whitespace-nowrap">{{ project.title }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">{{ project.createdByName }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">{{ formatDate(project.dueDate) }}</td>
@@ -28,11 +28,20 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { getCurrentUserProjects } from "~/services/projectService";
 import type { IProject } from "~/Interfaces/IProject";
 
 // State to store the projects data
 const projects = ref<IProject[]>([]);
+
+// Access the router instance
+const router = useRouter();
+
+// Function to navigate to the project page
+const goToProject = (projectId: number) => {
+	router.push(`/project/${projectId}`);
+};
 
 // Function to load projects for the logged-in user
 const loadProjects = async () => {
@@ -49,6 +58,7 @@ const loadProjects = async () => {
 // Fetch projects when the component is mounted
 onMounted(() => {
 	loadProjects();
+	addEventListener("project-created", loadProjects);
 });
 
 // Method to format the due date

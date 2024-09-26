@@ -12,9 +12,14 @@
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@pinia/nuxt": "^0.5.4",
     "jwt-decode": "^4.0.0",
     "nuxt": "^3.13.0",
+    "pinia": "^2.2.2",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-kanban": "^1.8.0",
+    "vue-router": "latest",
+    "vue3-smooth-dnd": "^0.0.6",
+    "yarn": "^1.22.22"
   }
 }

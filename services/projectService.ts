@@ -68,3 +68,16 @@ export const getCurrentUserProjects = async (): Promise<IProject[]> => {
 		throw error;
 	}
 };
+
+export const getProjectById = async (projectId: number): Promise<IProject> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Project/${projectId}`;
+
+	try {
+		const response = await fetchWithAuth(url);
+		return response as IProject;
+	} catch (error) {
+		console.error(`Error fetching project with ID ${projectId}:`, error);
+		throw error;
+	}
+};

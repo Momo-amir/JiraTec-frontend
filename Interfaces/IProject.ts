@@ -1,4 +1,5 @@
 import type { IUser } from "~/Interfaces/IUser";
+import type { ITask } from "./ITask";
 
 export interface IProject {
 	projectID: number; // Required
@@ -7,6 +8,6 @@ export interface IProject {
 	createdBy?: IUser; // Optional
 	createdByName?: string; // Optional
 	createdDate?: string; // Optional
-	tasks?: any[]; // Optional
+	tasks?: ITask[]; // Optional
 	users?: IUser[]; // Optional
 }

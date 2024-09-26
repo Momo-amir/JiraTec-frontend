@@ -32,7 +32,7 @@ import { ref } from "vue";
 
 defineProps<{ isVisible: boolean }>();
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "project-created"]);
 
 const newProject = ref<{
 	title: string;
@@ -46,6 +46,10 @@ const closeModal = () => {
 	emit("close");
 };
 
+const projectCreated = () => {
+	emit("project-created");
+};
+
 const handleSubmit = async () => {
 	try {
 		const projectPayload = {
@@ -54,7 +58,12 @@ const handleSubmit = async () => {
 		};
 
 		const createdProject = await createProject(projectPayload);
+		projectCreated();
 		console.log("Project created successfully", createdProject);
+
+		// Clear the form inputs
+		newProject.value.title = "";
+		newProject.value.description = "";
 
 		closeModal();
 	} catch (error) {

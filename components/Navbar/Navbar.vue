@@ -1,6 +1,6 @@
 <!-- YourMainComponent.vue -->
 <template>
-	<div>
+	<div v-if="authStore.isLoggedIn">
 		<nav>
 			<div class="flex justify-between items-center mx-auto w-full bg-white py-5 shadow-md">
 				<div>
@@ -15,12 +15,13 @@
 						<li class="hover:text-accent">
 							<nuxt-link to="/UiLib">UI library</nuxt-link>
 						</li>
-						<li>
-							<button @click="logoutUser" class="py-2 px-4 bg-red-500 text-white rounded-md">Logout</button>
-						</li>
+
 						<li>
 							<!-- Button to open the modal -->
 							<button @click="showModal = true" class="py-2 px-4 bg-green-500 text-white rounded-md">Add New Project</button>
+						</li>
+						<li>
+							<button @click="logoutUser" class="py-2 px-4 bg-red-500 text-white rounded-md">Logout</button>
 						</li>
 					</ul>
 				</div>
@@ -33,15 +34,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useAuthStore } from "@/stores/auth"; // Adjust the import path as needed
+
+const authStore = useAuthStore();
+
+const showModal = ref(false);
 
 const logoutUser = () => {
-	localStorage.removeItem("token"); // Clear the JWT token from local storage
+	authStore.logout();
 	navigateTo("/login"); // Redirect to the login page
 };
 
-// Reactive variable to control the visibility of the modal
-const showModal = ref(false);
-
-// Function to handle project creation
+// Check login status on component mount
+onMounted(() => {
+	if (typeof window !== "undefined") {
+		authStore.isLoggedIn = !!localStorage.getItem("token");
+	}
+});
 </script>
