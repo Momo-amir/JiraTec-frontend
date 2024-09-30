@@ -1,18 +1,18 @@
 <template>
-	<div class="p-4 bg-white shadow rounded-md">
-		<h2 class="text-xl font-semibold mb-4">Project Summary</h2>
+	<div class="p-4 bg-base-100 shadow rounded-md">
+		<h2 class="text-xl font-semibold mb-4 text-base-content">Project Summary</h2>
 		<div class="overflow-x-auto">
-			<table class="min-w-full divide-y divide-gray-200">
+			<table class="min-w-full divide-y divide-base-300">
 				<thead>
 					<tr>
-						<th class="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase">Project Name</th>
-						<th class="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase">Project Manager</th>
-						<th class="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase">Due Date</th>
-						<th class="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase">Status</th>
+						<th class="px-4 py-2 text-left text-sm font-medium text-base-content/70 uppercase">Project Name</th>
+						<th class="px-4 py-2 text-left text-sm font-medium text-base-content/70 uppercase">Project Manager</th>
+						<th class="px-4 py-2 text-left text-sm font-medium text-base-content/70 uppercase">Due Date</th>
+						<th class="px-4 py-2 text-left text-sm font-medium text-base-content/70 uppercase">Status</th>
 					</tr>
 				</thead>
-				<tbody class="bg-white divide-y divide-gray-200">
-					<tr v-for="project in projects" :key="project.projectID" @click="goToProject(project.projectID)" class="cursor-pointer hover:bg-gray-100">
+				<tbody class="bg-base-100 divide-y divide-base-300">
+					<tr v-for="project in projects" :key="project.projectID" @click="goToProject(project.projectID)" class="cursor-pointer hover:bg-base-200">
 						<td class="px-4 py-2 whitespace-nowrap">{{ project.title }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">{{ project.createdByName }}</td>
 						<td class="px-4 py-2 whitespace-nowrap">{{ formatDate(project.dueDate) }}</td>

@@ -1,25 +1,25 @@
 <template>
 	<div v-if="isVisible" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-		<div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+		<div class="bg-base-100 p-6 rounded-lg shadow-lg w-1/3">
 			<header class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold">Add New Project</h2>
-				<button @click="closeModal" class="text-gray-500 hover:text-gray-700">&times;</button>
+				<h2 class="text-xl font-semibold text-base-content">Add New Project</h2>
+				<button @click="closeModal" class="text-base-content hover:text-base-content/70">&times;</button>
 			</header>
 
 			<!-- Form for adding a new project -->
 			<form @submit.prevent="handleSubmit">
 				<div class="mb-4">
-					<label for="title" class="block text-sm font-medium text-gray-700">Project Title</label>
-					<input type="text" id="title" v-model="newProject.title" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required />
+					<label for="title" class="block text-sm font-medium text-base-content">Project Title</label>
+					<input type="text" id="title" v-model="newProject.title" class="mt-1 block w-full border border-base-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" required />
 				</div>
 				<div class="mb-4">
-					<label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-					<textarea id="description" v-model="newProject.description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
+					<label for="description" class="block text-sm font-medium text-base-content">Description</label>
+					<textarea id="description" v-model="newProject.description" class="mt-1 block w-full border border-base-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" required></textarea>
 				</div>
 
 				<div class="flex justify-end">
-					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-gray-300 hover:bg-gray-400 rounded-md">Cancel</button>
-					<button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md">Add Project</button>
+					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-base-300 hover:bg-base-400 rounded-md">Cancel</button>
+					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-focus text-base-content rounded-md">Add Project</button>
 				</div>
 			</form>
 		</div>

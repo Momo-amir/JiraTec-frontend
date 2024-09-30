@@ -1,12 +1,12 @@
 <template>
 	<div class="flex space-x-4">
 		<div v-for="status in statuses" :key="status" class="w-1/3" @drop="onDrop(status)" @dragover.prevent>
-			<h2 class="text-xl font-semibold mb-2">
+			<h2 class="text-xl font-semibold mb-2 text-primary">
 				{{ statusLabels[status] }}
 			</h2>
-			<div class="bg-gray-100 p-2 rounded-md min-h-[200px]">
-				<div v-for="task in tasksByStatus[status]" :key="task.taskID" class="bg-white p-2 mb-2 rounded-md shadow hover:bg-slate-200 ease-out duration-200" draggable="true" @dragstart="onDragStart(task)" @dragend="onDragEnd">
-					<TaskCard :task="task" />
+			<div class="bg-base-200 p-2 rounded-md min-h-[200px]">
+				<div v-for="task in tasksByStatus[status]" :key="task.taskID" class="bg-base-100 p-2 mb-2 rounded-md shadow hover:bg-base-300 ease-out duration-200" draggable="true" @dragstart="onDragStart(task)" @dragend="onDragEnd">
+					<TaskCard :task="task" @taskDeleted="taskDeleted" />
 				</div>
 			</div>
 		</div>
@@ -22,7 +22,7 @@ const props = defineProps<{
 	tasks: ITask[];
 }>();
 
-const emits = defineEmits(["taskUpdated"]);
+const emits = defineEmits(["taskUpdated", "taskDeleted"]);
 
 const statuses = [0, 1, 2]; // Corresponds to TaskStatusEnum
 
@@ -73,5 +73,10 @@ const updateTaskStatus = async (task: ITask) => {
 	} catch (error) {
 		console.error("Failed to update task status:", error);
 	}
+};
+
+const taskDeleted = (taskId: number) => {
+	// Emit the taskDeleted event with the taskId to parent component
+	emits("taskDeleted", taskId);
 };
 </script>

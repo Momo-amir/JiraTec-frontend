@@ -18,6 +18,4 @@ const props = defineProps<{
 	description: string;
 	imageUrl: string;
 }>();
-
-console.log("Props received in Hero.vue:", props);
 </script>

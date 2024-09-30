@@ -1,8 +1,8 @@
 <template>
 	<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-		<div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+		<div class="bg-base-100 p-6 rounded-lg shadow-lg w-1/3 bg-opacity-100">
 			<header class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold">Add New Task</h2>
+				<h2 class="text-xl font-semibold text-primary">Add New Task</h2>
 				<button @click="closeModal" class="text-gray-500 hover:text-gray-700">&times;</button>
 			</header>
 
@@ -48,8 +48,8 @@
 
 				<!-- Form Actions -->
 				<div class="flex justify-end">
-					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-gray-300 hover:bg-gray-400 rounded-md">Cancel</button>
-					<button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md">Add Task</button>
+					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-secondary-light hover:bg-secondary-dark text-base rounded-md">Cancel</button>
+					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-dark text-base-100 rounded-md">Add Task</button>
 				</div>
 			</form>
 		</div>

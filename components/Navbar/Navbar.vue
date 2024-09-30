@@ -1,27 +1,25 @@
-<!-- YourMainComponent.vue -->
 <template>
 	<div v-if="authStore.isLoggedIn">
 		<nav>
-			<div class="flex justify-between items-center mx-auto w-full bg-white py-5 shadow-md">
+			<div class="flex justify-between items-center mx-auto w-full bg-base-100 py-5 shadow-md">
 				<div>
 					<nuxt-link to="/">
 						<img alt="Logo" />
 					</nuxt-link>
 				</div>
 				<div class="mr-4">
-					<ul class="flex gap-4">
+					<ul class="flex gap-4 items-center">
 						<li class="hover:text-accent"></li>
 
-						<li class="hover:text-accent">
-							<nuxt-link to="/UiLib">UI library</nuxt-link>
+						<li>
+							<light-dark />
 						</li>
-
 						<li>
 							<!-- Button to open the modal -->
-							<button @click="showModal = true" class="py-2 px-4 bg-green-500 text-white rounded-md">Add New Project</button>
+							<button @click="showModal = true" class="py-2 px-4 bg-accent text-base-100 rounded-md">Add New Project</button>
 						</li>
 						<li>
-							<button @click="logoutUser" class="py-2 px-4 bg-red-500 text-white rounded-md">Logout</button>
+							<button @click="logoutUser" class="py-2 px-4 bg-error text-base-100 rounded-md">Logout</button>
 						</li>
 					</ul>
 				</div>

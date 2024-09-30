@@ -1,25 +1,53 @@
 <template>
-	<div class="p-2">
-		<span class="text-xs font-semibold" :class="priorityClass">{{ priority }}</span>
-		<h3 class="font-semibold">{{ task.title }}</h3>
-		<p class="text-sm text-gray-600">{{ task.description }}</p>
-		<p class="text-xs text-gray-500">Assigned to: {{ assignedUserName }}</p>
-		<div class="flex justify-end mt-2">
-			<button @click="deleteTask" class="text-red-500 hover:text-red-700">Delete</button>
+	<div class="p-2 bg-base-100" @click="handleClickOutside">
+		<span class="text-xs font-semibold px-1 rounded-sm" :class="priorityClass">{{ priority }}</span>
+		<h3 class="font-semibold text-primary">{{ task.title }}</h3>
+		<p class="text-sm text-base-content">{{ task.description }}</p>
+		<p class="text-xs text-base-content/70">Assigned to: {{ assignedUserName }}</p>
+		<div class="flex justify-end mt-2 relative">
+			<!-- Options Button -->
+			<button @click="toggleOptions" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
+			<!-- Options Menu -->
+			<div v-if="showOptions" class="absolute top-4 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg" ref="optionsMenu">
+				<ul>
+					<li>
+						<button class="text-xs w-full text-left px-4 py-2 text-primary hover:text-primary-focus hover:bg-base-200 ease-in duration-200">Edit</button>
+					</li>
+					<li>
+						<button @click="() => deleteTask(props.task.taskID)" class="text-error hover:text-error-focus text-xs w-full text-left px-4 py-2 hover:bg-base-200 ease-in duration-200">Delete</button>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, computed, onBeforeUnmount } from "vue";
 import type { ITask } from "~/Interfaces/ITask";
 import { getUserById } from "~/services/authService";
-import { deleteTask } from "~/services/taskService";
+import { deleteTask as deleteTaskService } from "~/services/taskService";
 
 const props = defineProps<{
 	task: ITask;
 }>();
 
+const emits = defineEmits(["taskDeleted"]);
+
 const assignedUserName = ref("Unassigned");
+const showOptions = ref(false);
+const optionsMenu = ref<HTMLElement | null>(null);
+
+const toggleOptions = (event: Event) => {
+	event.stopPropagation();
+	showOptions.value = !showOptions.value;
+};
+
+const handleClickOutside = (event: Event) => {
+	if (optionsMenu.value && !optionsMenu.value.contains(event.target as Node)) {
+		showOptions.value = false;
+	}
+};
 
 onMounted(async () => {
 	if (props.task.assignedTo) {
@@ -30,6 +58,12 @@ onMounted(async () => {
 			console.error("Failed to fetch assigned user:", error);
 		}
 	}
+
+	document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+	document.removeEventListener("click", handleClickOutside);
 });
 
 // Priority label
@@ -59,4 +93,15 @@ const priorityClass = computed(() => {
 			return "";
 	}
 });
+
+const deleteTask = async (taskId: number) => {
+	try {
+		console.log("Deleting task with ID: ", taskId);
+
+		await deleteTaskService(taskId);
+		emits("taskDeleted", taskId);
+	} catch (error) {
+		console.error("Failed to delete task:", error);
+	}
+};
 </script>

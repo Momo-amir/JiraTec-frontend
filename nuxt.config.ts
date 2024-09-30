@@ -21,28 +21,6 @@ export default defineNuxtConfig({
 		config: {
 			theme: {
 				extend: {
-					colors: {
-						primary: {
-							DEFAULT: "#14213D", // Customize your primary color
-							light: "#6cb2eb", // Lighter shade for primary
-							dark: "#1d72b8", // Darker shade for primary
-						},
-						secondary: {
-							DEFAULT: "#ffed4a", // Customize your secondary color
-							light: "#fff9c2", // Lighter shade for secondary
-							dark: "#f9d71c", // Darker shade for secondary
-						},
-						accent: {
-							DEFAULT: "#38c172", // Customize your accent color
-							light: "#51d88a", // Lighter shade for accent
-							dark: "#1f9d55", // Darker shade for accent
-						},
-						base: {
-							DEFAULT: "#ffffff", // Customize your base color
-							light: "#f7fafc", // Lighter base
-							dark: "#e2e8f0", // Darker base
-						},
-					},
 					fontFamily: {
 						sans: ["Poppins", "sans-serif"], // Customize your desired fonts
 						serif: ["Open sans", "serif"],
@@ -61,8 +39,12 @@ export default defineNuxtConfig({
 						"6xl": "4rem", // 64px
 						// Add more custom font sizes here
 					},
-					safelist: ["bg-primary", "bg-secondary", "bg-accent", "text-primary", "text-secondary", "text-accent"],
 				},
+			},
+
+			plugins: [require("daisyui")],
+			daisyui: {
+				themes: ["light", "dark", "cupcake"],
 			},
 		},
 	},
