@@ -9,3 +9,10 @@ export enum TaskPriorityEnum {
 	Medium = 1,
 	High = 2,
 }
+
+export enum RoleEnum {
+	Admin = 1,
+	User = 2,
+	ProjectLeader = 3,
+	Developer = 4,
+}

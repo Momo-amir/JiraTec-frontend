@@ -10,7 +10,7 @@
 				<label for="password" class="block text-sm font-medium text-base-content">Password</label>
 				<input type="password" id="password" v-model="user.password" required class="mt-1 block w-full px-3 py-2 border border-base-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
 			</div>
-			<button type="submit" class="w-full bg-primary text-base-content py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Login</button>
+			<button type="submit" class="w-full bg-primary text-base-100 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Login</button>
 		</form>
 		<div class="mt-4 flex justify-between text-sm">
 			<a href="/register" class="text-primary hover:underline">Register</a>

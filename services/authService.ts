@@ -7,7 +7,6 @@ export const registerUser = async (user: { name: string; email: string; password
 	const config = useRuntimeConfig();
 	const url = `${config.public.apiBaseUrl}User/register`; // Make sure the correct value is used
 	console.log("Sending request to:", url);
-	console.log("Request payload:", user);
 
 	try {
 		const response = await $fetch(url, {
@@ -31,7 +30,6 @@ export const loginUser = async (user: { email: string; password: string }): Prom
 	const config = useRuntimeConfig();
 	const url = `${config.public.apiBaseUrl}User/login`;
 	console.log("Sending request to:", url);
-	console.log("Request payload:", user);
 
 	try {
 		const response = await $fetch<ILoginResponse>(url, {

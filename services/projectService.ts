@@ -35,7 +35,7 @@ export const createProject = async (project: { title: string; description: strin
 	}
 };
 
-export const addUsersToProject = async (projectId: number, userIds: number[]): Promise<void> => {
+export const addUsersToProject = async (projectId: number, userIds: number[], value: string): Promise<void> => {
 	const config = useRuntimeConfig();
 	const url = `${config.public.apiBaseUrl}Project/${projectId}/Users`;
 

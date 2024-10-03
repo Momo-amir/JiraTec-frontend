@@ -7,7 +7,7 @@
 						<img alt="Logo" />
 					</nuxt-link>
 				</div>
-				<div class="mr-4">
+				<div class="mr-10">
 					<ul class="flex gap-4 items-center">
 						<li class="hover:text-accent"></li>
 

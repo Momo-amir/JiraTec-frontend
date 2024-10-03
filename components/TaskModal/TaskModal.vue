@@ -2,7 +2,7 @@
 	<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
 		<div class="bg-base-100 p-6 rounded-lg shadow-lg w-1/3 bg-opacity-100">
 			<header class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold text-primary">Add New Task</h2>
+				<h2 class="text-xl font-semibold text-primary">{{ isEditMode ? "Edit Task" : "Add New Task" }}</h2>
 				<button @click="closeModal" class="text-gray-500 hover:text-gray-700">&times;</button>
 			</header>
 
@@ -24,7 +24,7 @@
 					<label for="assignedTo" class="block text-sm font-medium text-gray-700">Assign To</label>
 					<select id="assignedTo" v-model="task.assignedTo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						<option value="">Select a user</option>
-						<option class="px-4 py-2" v-for="user in users" :key="user.userID" :value="user.userID">
+						<option v-for="user in users" :key="user.userID" :value="user.userID">
 							{{ user.name || user.email }}
 						</option>
 					</select>
@@ -49,7 +49,7 @@
 				<!-- Form Actions -->
 				<div class="flex justify-end">
 					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-secondary-light hover:bg-secondary-dark text-base rounded-md">Cancel</button>
-					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-dark text-base-100 rounded-md">Add Task</button>
+					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-dark text-base-100 rounded-md">{{ isEditMode ? "Update Task" : "Add Task" }}</button>
 				</div>
 			</form>
 		</div>
@@ -58,38 +58,41 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { createTask } from "~/services/taskService";
+import { createTask, updateTask } from "~/services/taskService";
 import { getProjectById } from "~/services/projectService";
 import type { ITask } from "~/Interfaces/ITask";
 import type { IUser } from "~/Interfaces/IUser";
-import { TaskStatusEnum, TaskPriorityEnum } from "~/enums/enums";
+import { TaskPriorityEnum, TaskStatusEnum } from "~/enums/enums";
 
 const props = defineProps<{
 	projectId: number;
+	taskToEdit?: ITask; // Optional task to be edited
 }>();
 
-const emits = defineEmits(["close", "taskCreated"]);
+const emits = defineEmits(["close", "taskCreated", "taskUpdated"]);
 
-// Initialize task with required fields
-const task = ref<Partial<ITask>>({
-	projectID: props.projectId,
-	title: "",
-	description: "",
-	status: TaskStatusEnum.ToDo,
-	priority: TaskPriorityEnum.Medium,
-	assignedTo: undefined,
-	dueDate: undefined,
-});
+const isEditMode = ref(!!props.taskToEdit); // Determine if the modal is for editing or creating a task
+const task = ref<Partial<ITask>>(
+	props.taskToEdit
+		? { ...props.taskToEdit }
+		: {
+				projectID: props.projectId,
+				title: "",
+				description: "",
+				status: TaskStatusEnum.ToDo,
+				priority: TaskPriorityEnum.Medium,
+				assignedTo: undefined,
+				dueDate: undefined,
+		  }
+);
 
 const users = ref<IUser[]>([]);
-
 const priorities = [
 	{ value: TaskPriorityEnum.Low, label: "Low" },
 	{ value: TaskPriorityEnum.Medium, label: "Medium" },
 	{ value: TaskPriorityEnum.High, label: "High" },
 ];
 
-// Load project users
 const loadProjectUsers = async () => {
 	try {
 		const project = await getProjectById(props.projectId);
@@ -114,17 +117,19 @@ const handleSubmit = async () => {
 			task.value.dueDate = new Date(task.value.dueDate).toISOString();
 		}
 
-		// Set taskID to 0 if it's a new task
-		task.value.taskID = 0;
+		if (isEditMode.value) {
+			// Update existing task
+			await updateTask(task.value.taskID!, task.value);
+			emits("taskUpdated", task.value);
+		} else {
+			// Create new task
+			const newTask = await createTask(task.value);
+			emits("taskCreated", newTask);
+		}
 
-		// **Log the task data before sending**
-		console.log("Submitting Task:", task.value);
-
-		const newTask = await createTask(task.value);
-		emits("taskCreated", newTask);
 		closeModal();
 	} catch (error) {
-		console.error("Failed to create task:", error);
+		console.error("Failed to submit task:", error);
 	}
 };
 </script>
