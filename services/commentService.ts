@@ -22,7 +22,7 @@ export const createComment = async (taskID: number, content: string, userId: num
 	const payload = {
 		taskID: taskID,
 		content: content,
-		userID: 1, // Replace this with the actual user ID
+		userID: userId, // Replace this with the actual user ID
 	};
 
 	try {

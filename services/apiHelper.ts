@@ -13,7 +13,7 @@ export const fetchWithAuth = async (url: string, options: any = {}) => {
 		// Make the API request with the merged headers
 		const response = await $fetch(url, { ...options, headers });
 
-		// You could add additional logic here, like checking for 401 status codes to handle token refresh
+		//can add additional logic here, like checking for 401 status codes to handle token refresh
 		return response;
 	} catch (error) {
 		console.error("Error in fetchWithAuth:", error);

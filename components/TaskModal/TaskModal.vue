@@ -79,7 +79,7 @@ const props = defineProps<{
 
 const emits = defineEmits(["close", "taskCreated", "taskUpdated"]);
 
-const isEditMode = ref(!!props.taskToEdit); // Determine if the modal is for editing or creating a task
+const isEditMode = ref(!!props.taskToEdit); // Determine if the modal is for editing or creating a task by checking if taskToEdit is provided the !! converts the value to a boolean
 const task = ref<Partial<ITask>>(
 	props.taskToEdit
 		? { ...props.taskToEdit }
@@ -92,6 +92,7 @@ const task = ref<Partial<ITask>>(
 				assignedTo: undefined,
 				dueDate: undefined,
 		  }
+	// Partial<ITask> is used to allow the task object to be partially filled using the spread operator to copy the taskToEdit object if it exists
 );
 
 const users = ref<IUser[]>([]);

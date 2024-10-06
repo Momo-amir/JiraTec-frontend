@@ -43,8 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { getCurrentUserProjects, deleteProject } from "~/services/projectService";
 import { useAuthStore } from "~/stores/auth";
 import type { IProject } from "~/Interfaces/IProject";

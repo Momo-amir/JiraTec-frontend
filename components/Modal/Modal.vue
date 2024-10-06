@@ -61,7 +61,7 @@ const handleSubmit = async () => {
 		projectCreated();
 		console.log("Project created successfully", createdProject);
 
-		// Clear the form inputs
+		// Clears the form inputs
 		newProject.value.title = "";
 		newProject.value.description = "";
 

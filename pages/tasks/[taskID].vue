@@ -18,10 +18,8 @@
 
 				<!-- Show edit/delete options only for the comment author -->
 				<div v-if="comment.user && comment.user.userID === authStore.user?.userID" class="relative mt-2 flex justify-end">
-					<!-- Options Button -->
 					<button @click="toggleOptions(comment.commentID)" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
 
-					<!-- Options Menu -->
 					<div v-if="showOptionsForComment(comment.commentID)" class="absolute top-4 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg">
 						<ul>
 							<li>
@@ -52,10 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { getTaskById } from "~/services/taskService";
 import { getCommentsByTaskId, createComment, deleteComment as deleteCommentService, updateComment } from "~/services/commentService";
-import { useRoute } from "vue-router";
 import { useAuthStore } from "~/stores/auth";
 import { getUserById } from "~/services/authService";
 
@@ -65,7 +61,6 @@ const taskID = parseInt(route.params.taskID as string);
 import type { ITask } from "~/Interfaces/ITask";
 import type { IComment } from "~/Interfaces/IComment";
 
-// Access the auth store
 const authStore = useAuthStore();
 
 const task = ref<ITask | null>(null);

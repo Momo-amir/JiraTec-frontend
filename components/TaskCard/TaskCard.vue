@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, onBeforeUnmount } from "vue";
 import type { ITask } from "~/Interfaces/ITask";
 import { getUserById } from "~/services/authService";
 import { deleteTask as deleteTaskService } from "~/services/taskService";

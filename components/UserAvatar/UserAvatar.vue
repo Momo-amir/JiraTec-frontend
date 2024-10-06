@@ -34,6 +34,6 @@ const hideTooltip = () => {
 // Generate random color based on userID for consistency
 const getRandomColor = (userID: number) => {
 	const colors = ["#34A853", "#EA4335", "#4285F4", "#FBBC05", "#FF6D00", "#46BDFA", "#9AA0A6"];
-	return colors[userID % colors.length];
+	return colors[userID % colors.length]; // Use the remainder to get a color from the array so if the userID is above 6, it will loop back to the first color
 };
 </script>

@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { registerUser } from "~/services/authService";
 
 // Define the user object with initial values

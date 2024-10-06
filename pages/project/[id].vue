@@ -7,7 +7,6 @@
 			</div>
 
 			<div>
-				<!-- Assigned Users Section -->
 				<h2 class="text-lg font-semibold text-primary">Project Team</h2>
 				<div class="flex mt-2 space-x-1">
 					<UserAvatar v-for="user in project.users" :key="user.userID" :user="user" />
@@ -19,20 +18,17 @@
 			<div class="">
 				<button @click="showTaskModal = true" class="mt-4 mx-4 px-4 py-2 bg-primary text-base-100 rounded-md">Add Task</button>
 
-				<button @click="showUserModal = true" class="mt-4 px-4 py-2 bg-primary text-base-100 rounded-md">Add To Team</button>
+				<button @click="showUserModal = true" class="mt-4 px-4 py-2 bg-primary text-base-100 rounded-md">Manage Team</button>
 			</div>
 		</div>
 
-		<!-- Kanban Board Component -->
 		<div class="m-10">
 			<KanbanBoard :tasks="project.tasks || []" @taskUpdated="handleTaskUpdated" @taskDeleted="handleTaskDeleted" @editTask="handleTaskEdited" @addColumn="handleAddColumn" @editColumn="handleEditColumn" />
 		</div>
 
-		<!-- Task Modal Component -->
 		<TaskModal v-if="showTaskModal" @close="closeTaskModal" @taskCreated="handleTaskCreated" @taskUpdated="handleTaskUpdated" :projectId="project.projectID" :taskToEdit="taskToEdit" />
 
-		<!-- User Modal Component -->
-		<UserModal v-if="showUserModal" @close="showUserModal = false" @usersAdded="loadProject" :projectId="project.projectID" />
+		<UserModal v-if="showUserModal" @close="showUserModal = false" @usersUpdated="loadProject" :projectId="project.projectID" :projectUsers="project.users || []" />
 	</div>
 	<div v-else>
 		<div class="flex flex-col justify-center items-center h-[100vh] bg-base-100">
@@ -58,7 +54,7 @@ const projectId = parseInt(route.params.id as string);
 const project = ref<IProject | null>(null);
 const showTaskModal = ref(false);
 const showUserModal = ref(false);
-const taskToEdit = ref(undefined); // Add this ref
+const taskToEdit = ref(undefined);
 const errorMessage = ref<string | null>(null);
 
 const loadProject = async () => {
@@ -74,8 +70,6 @@ const loadProject = async () => {
 onMounted(() => {
 	loadProject();
 });
-
-// when receiving the emit from the child component we need to handle them, so we need to add the following methods
 
 const handleTaskCreated = (task: any) => {
 	if (project.value) {

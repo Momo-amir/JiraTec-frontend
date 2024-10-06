@@ -13,8 +13,12 @@
 </template>
 
 <script setup lang="ts">
-const currentUser = "John Doe";
-const frontPageTitle = ref<string>(`Welcome to the Project Management App ${{ currentUser }}`);
-const frontPageDescription = ref<string>("This is a simple project management app built with Vue 3 and Tailwind CSS");
-const imageUrl = ref("/assets/images/heroimage.png");
+import { ref, computed } from "vue";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
+const currentUser = computed(() => authStore.user?.name || "Guest");
+
+const frontPageTitle = computed(() => `Welcome to the Project Management App, ${currentUser.value}`);
+const frontPageDescription = ref<string>("This is a simple project management app built with Nuxt3 and Tailwind CSS to help you manage your projects with ease. Get started by creating a new project or viewing your existing projects.");
 </script>

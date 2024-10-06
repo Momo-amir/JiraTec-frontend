@@ -2,9 +2,9 @@
 	<div v-if="authStore.isLoggedIn">
 		<nav>
 			<div class="flex justify-between items-center mx-auto w-full bg-base-100 py-5 shadow-md">
-				<div>
+				<div class="ml-4">
 					<nuxt-link to="/">
-						<img alt="Logo" />
+						<img alt="Logo" src="~/assets/images/Atlassian-Logo-2010s1.png" class="w-24" />
 					</nuxt-link>
 				</div>
 				<div class="mr-10">
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useAuthStore } from "@/stores/auth"; // Adjust the import path as needed
+import { useAuthStore } from "@/stores/auth";
 
 const authStore = useAuthStore();
 

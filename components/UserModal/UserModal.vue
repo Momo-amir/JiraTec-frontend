@@ -2,7 +2,7 @@
 	<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
 		<div class="bg-base-100 p-6 rounded-lg shadow-lg w-1/3">
 			<header class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold text-primary">Manage Project Users</h2>
+				<h2 class="text-xl font-semibold text-primary">Manage Team</h2>
 				<button @click="closeModal" class="text-base-content hover:text-base-content/70">&times;</button>
 			</header>
 
@@ -11,10 +11,8 @@
 					<li v-for="user in users" :key="user.userID" class="flex items-center justify-between py-2">
 						<div>
 							<span>{{ user.name || user.email }}</span>
-							<!-- Optionally display user's role if available -->
 						</div>
-						<div class="flex items-center space-x-2">
-							<!-- Add/Remove Button -->
+						<div>
 							<button
 								@click="toggleUserAssignment(user.userID)"
 								class="py-1 px-3 rounded-md text-sm"
@@ -75,18 +73,12 @@ const toggleUserAssignment = async (userID: number) => {
 		if (isUserInProject(userID)) {
 			// Remove user from project
 			await removeUserFromProject(props.projectId, userID);
-			// Update local project users list
-			props.projectUsers = props.projectUsers.filter((user) => user.userID !== userID);
 		} else {
 			// Add user to project
-			await addUsersToProject(props.projectId, [userID], ""); // The 'value' parameter can be left empty if not used
-			// Update local project users list
-			const user = users.value.find((u) => u.userID === userID);
-			if (user) {
-				props.projectUsers.push(user);
-			}
+			await addUsersToProject(props.projectId, [userID], "");
 		}
-		emits("usersUpdated"); // Notify parent to reload project data if necessary
+		// Emit event to notify parent component to reload data
+		emits("usersUpdated");
 	} catch (error) {
 		console.error("Failed to update user assignment:", error);
 	}

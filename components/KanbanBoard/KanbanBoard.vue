@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import type { ITask } from "~/Interfaces/ITask";
-import { updateTask } from "~/services/taskService"; // Import updateTask function
+import { updateTask } from "~/services/taskService";
 
 const props = defineProps<{
 	tasks: ITask[];
@@ -64,7 +64,7 @@ const onDrop = async (status: number) => {
 
 const updateTaskStatus = async (task: ITask) => {
 	try {
-		console.log("Updating Task:", task); // Log the full task object for debugging
+		// console.log("Updating Task:", task); // Log the full task object for debugging
 
 		// Pass the full task object to the updateTask method
 		await updateTask(task.taskID, task);

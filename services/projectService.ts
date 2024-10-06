@@ -35,11 +35,11 @@ export const createProject = async (project: { title: string; description: strin
 	}
 };
 
-export const addUsersToProject = async (projectId: number, userIds: number[], value: string): Promise<void> => {
+export const addUsersToProject = async (projectId: number, userIds: number[], role: string): Promise<void> => {
 	const config = useRuntimeConfig();
 	const url = `${config.public.apiBaseUrl}Project/${projectId}/Users`;
 
-	const userDtos = userIds.map((userId) => ({ userID: userId }));
+	const userDtos = userIds.map((userId) => ({ userID: userId, role }));
 
 	try {
 		await fetchWithAuth(url, {
@@ -52,6 +52,23 @@ export const addUsersToProject = async (projectId: number, userIds: number[], va
 		});
 	} catch (error) {
 		console.error(`Error adding users to project ${projectId}:`, error);
+		throw error;
+	}
+};
+
+export const removeUserFromProject = async (projectId: number, userId: number): Promise<void> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Project/${projectId}/Users/${userId}`;
+
+	try {
+		await fetchWithAuth(url, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+			},
+		});
+	} catch (error) {
+		console.error(`Error removing user from project ${projectId}:`, error);
 		throw error;
 	}
 };
@@ -95,37 +112,6 @@ export const deleteProject = async (projectId: number): Promise<void> => {
 		});
 	} catch (error) {
 		console.error(`Error deleting project with ID ${projectId}:`, error);
-		throw error;
-	}
-};
-
-export const removeUserFromProject = async (projectId: number, userId: number): Promise<void> => {
-	const config = useRuntimeConfig();
-	const url = `${config.public.apiBaseUrl}Projects/${projectId}/users/${userId}`;
-	try {
-		await fetchWithAuth(url, {
-			method: "DELETE",
-		});
-	} catch (error) {
-		console.error("Error removing user from project:", error);
-		throw error;
-	}
-};
-
-export const updateUserRoleInProject = async (projectId: number, userId: number, role: RoleEnum): Promise<void> => {
-	const config = useRuntimeConfig();
-	const url = `${config.public.apiBaseUrl}Projects/${projectId}/users/${userId}/role`;
-	const payload = { role };
-	try {
-		await fetchWithAuth(url, {
-			method: "PUT",
-			body: JSON.stringify(payload),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-	} catch (error) {
-		console.error("Error updating user role in project:", error);
 		throw error;
 	}
 };

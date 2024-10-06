@@ -1,13 +1,16 @@
-// Interfaces/IComment.ts
 export interface IComment {
-	commentID: number; // Unique identifier for the comment
-	taskID: number; // The ID of the task this comment is associated with
-	userID: number; // The ID of the user who made the comment
-	content: string; // The content of the comment
-	createdDate: string; // The date the comment was created
+	commentID: number;
+	taskID: number;
+	userID: number;
+	content: string;
+	createdDate: string;
 	user: {
-		userID: number; // The ID of the user
-		name: string; // The name of the user who posted the comment
-		email: string; // The email of the user who posted the comment
-	}; // The user object associated with the comment
+		userID: number;
+		name: string;
+		email: string;
+	};
 }
+/**
+ * Interface representing a comment in the system, including details about the comment,
+ * the associated task, the user who made the comment, and the creation date.
+ */

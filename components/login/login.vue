@@ -24,12 +24,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAuthStore } from "@/stores/auth"; // Adjust the import path as needed
+import { useAuthStore } from "@/stores/auth";
 import { loginUser } from "~/services/authService";
 
 const user = ref({
 	email: "",
-	password: "", // Use 'passwordHash' to match your API
+	password: "",
 });
 const errorMessage = ref("");
 
@@ -40,7 +40,7 @@ const handleSubmit = async () => {
 		const response = await loginUser(user.value);
 		console.log("User logged in:", response);
 
-		// Save the JWT token using the store
+		// Saves the JWT token using the store
 		authStore.login(response.token);
 
 		// Redirect to the dashboard or other protected route
