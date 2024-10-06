@@ -1,9 +1,11 @@
-// stores/auth.ts
 import { defineStore } from "pinia";
+import type { IUser } from "~/Interfaces/IUser";
+import { FetchUser } from "~/services/authService";
 
 export const useAuthStore = defineStore("auth", {
 	state: () => ({
-		isLoggedIn: typeof window !== "undefined" && !!localStorage.getItem("token"), // Check if token is present !! converts to boolean
+		isLoggedIn: false,
+		user: null as IUser | null,
 	}),
 	actions: {
 		login(token: string) {
@@ -16,6 +18,19 @@ export const useAuthStore = defineStore("auth", {
 			if (typeof window !== "undefined") {
 				localStorage.removeItem("token");
 				this.isLoggedIn = false;
+				this.user = null;
+			}
+		},
+		setUser(user: IUser) {
+			this.user = user;
+			this.isLoggedIn = true;
+		},
+		async fetchUser() {
+			try {
+				const user = await FetchUser();
+				this.setUser(user);
+			} catch (error) {
+				console.error("Error fetching user:", error);
 			}
 		},
 	},

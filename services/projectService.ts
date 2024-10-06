@@ -81,3 +81,51 @@ export const getProjectById = async (projectId: number): Promise<IProject> => {
 		throw error;
 	}
 };
+
+export const deleteProject = async (projectId: number): Promise<void> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Project/${projectId}`;
+
+	try {
+		await fetchWithAuth(url, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+			},
+		});
+	} catch (error) {
+		console.error(`Error deleting project with ID ${projectId}:`, error);
+		throw error;
+	}
+};
+
+export const removeUserFromProject = async (projectId: number, userId: number): Promise<void> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Projects/${projectId}/users/${userId}`;
+	try {
+		await fetchWithAuth(url, {
+			method: "DELETE",
+		});
+	} catch (error) {
+		console.error("Error removing user from project:", error);
+		throw error;
+	}
+};
+
+export const updateUserRoleInProject = async (projectId: number, userId: number, role: RoleEnum): Promise<void> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Projects/${projectId}/users/${userId}/role`;
+	const payload = { role };
+	try {
+		await fetchWithAuth(url, {
+			method: "PUT",
+			body: JSON.stringify(payload),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+	} catch (error) {
+		console.error("Error updating user role in project:", error);
+		throw error;
+	}
+};
