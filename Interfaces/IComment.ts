@@ -10,7 +10,3 @@ export interface IComment {
 		email: string;
 	};
 }
-/**
- * Interface representing a comment in the system, including details about the comment,
- * the associated task, the user who made the comment, and the creation date.
- */
