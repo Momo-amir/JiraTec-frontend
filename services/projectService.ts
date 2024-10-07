@@ -39,7 +39,7 @@ export const addUsersToProject = async (projectId: number, userIds: number[], ro
 	const config = useRuntimeConfig();
 	const url = `${config.public.apiBaseUrl}Project/${projectId}/Users`;
 
-	const userDtos = userIds.map((userId) => ({ userID: userId, role }));
+	const userDtos = userIds.map((userId) => ({ userID: userId, role: 1 }));
 
 	try {
 		await fetchWithAuth(url, {

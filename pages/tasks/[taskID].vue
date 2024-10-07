@@ -20,7 +20,7 @@
 				<div v-if="comment.user && comment.user.userID === authStore.user?.userID" class="relative mt-2 flex justify-end">
 					<button @click="toggleOptions(comment.commentID)" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
 
-					<div v-if="showOptionsForComment(comment.commentID)" class="absolute top-4 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg">
+					<div v-if="showOptionsForComment(comment.commentID)" class="absolute top-4 z-10 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg">
 						<ul>
 							<li>
 								<button @click="startEditing(comment)" class="text-xs w-full text-left px-4 py-2 text-primary hover:text-primary-focus hover:bg-base-200 ease-in duration-200">Edit</button>
