@@ -44,7 +44,6 @@ const handleSubmit = async () => {
 		authStore.login(response.token);
 
 		// Redirect to the dashboard or other protected route
-		navigateTo("/");
 	} catch (error) {
 		errorMessage.value = "Invalid email or password. Please try again.";
 	}

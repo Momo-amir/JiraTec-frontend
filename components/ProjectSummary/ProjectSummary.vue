@@ -2,7 +2,7 @@
 	<div class="p-4 bg-base-100 shadow rounded-md">
 		<h2 class="text-xl font-semibold mb-4 text-base-content">Project Summary</h2>
 		<div class="overflow-x-auto">
-			<table class="min-w-full divide-y divide-base-300">
+			<table class="min-w-full divide-y divide-base-300 mb-10">
 				<thead>
 					<tr>
 						<th class="px-4 py-2 text-left text-sm font-medium text-base-content/70 uppercase">Project Name</th>
@@ -22,8 +22,8 @@
 						</td>
 						<td class="px-4 py-2 whitespace-nowrap flex justify-end">
 							<div v-if="isProjectOwner(project)" class="relative">
-								<button @click="toggleOptions(project.projectID)" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
-								<div v-if="showOptions === project.projectID" class="absolute top-4 right-2 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg">
+								<button @click="toggleOptions(project.projectID)" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200 mx-4">&#x22EE;</button>
+								<div v-if="showOptions === project.projectID" class="absolute top-4 right-4 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg z-10">
 									<ul>
 										<li>
 											<button @click="editProject(project)" class="text-xs w-full text-left px-4 py-2 text-primary hover:text-primary-focus hover:bg-base-200 ease-in duration-200">Edit</button>

@@ -6,15 +6,14 @@
 		<div class="flex items-center justify-center">
 			<h1 class="text-h1">Take a look at your projects</h1>
 		</div>
-		<div class="mx-10 mt-5 mb-16 w-1/2">
+		<div class="mx-10 mt-5 mb-16">
 			<project-summary />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "~/stores/auth";
 
 const authStore = useAuthStore();
 const currentUser = computed(() => authStore.user?.name || "Guest");

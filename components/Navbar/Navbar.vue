@@ -2,7 +2,7 @@
 	<div v-if="authStore.isLoggedIn">
 		<nav>
 			<div class="flex justify-between items-center mx-auto w-full bg-base-100 py-5 shadow-md">
-				<div class="ml-4">
+				<div class="ml-4 flex flex-row items-center">
 					<nuxt-link to="/">
 						<img alt="Logo" src="~/assets/images/Atlassian-Logo-2010s1.png" class="w-24" />
 					</nuxt-link>

@@ -55,7 +55,7 @@ const handleSubmit = async () => {
 	try {
 		const registeredUser = await registerUser(user.value);
 		console.log("User registered:", registeredUser);
-		return (successMessage.value = "User registered successfully! go to login page");
+		return (successMessage.value = "User registered successfully! go to login page"), navigateTo("/login"), 2000;
 		// Redirect or show a success message
 	} catch (error) {
 		// Check if the error response is a user already exists scenario

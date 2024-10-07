@@ -60,6 +60,7 @@ const handleSubmit = async () => {
 		const createdProject = await createProject(projectPayload);
 		projectCreated();
 		console.log("Project created successfully", createdProject);
+		reloadNuxtApp();
 
 		// Clears the form inputs
 		newProject.value.title = "";

@@ -49,9 +49,7 @@
 				<!-- Form Actions -->
 				<div class="flex justify-between items-center">
 					<!-- "View Full Details" Button (only in edit mode) -->
-					<div v-if="isEditMode">
-						<button @click="viewFullDetails" type="button" class="text-primary hover:underline">View Full Details</button>
-					</div>
+					<div v-if="isEditMode"></div>
 
 					<div class="flex">
 						<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-secondary-light hover:bg-secondary-dark text-base rounded-md">Cancel</button>
@@ -64,10 +62,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { createTask, updateTask } from "~/services/taskService";
 import { getProjectById } from "~/services/projectService";
-import { useRouter } from "vue-router";
+
 import type { ITask } from "~/Interfaces/ITask";
 import type { IUser } from "~/Interfaces/IUser";
 import { TaskPriorityEnum, TaskStatusEnum } from "~/enums/enums";
@@ -140,11 +137,5 @@ const handleSubmit = async () => {
 	} catch (error) {
 		console.error("Failed to submit task:", error);
 	}
-};
-
-const router = useRouter();
-
-const viewFullDetails = () => {
-	router.push(`/tasks/${task.value.taskID}`);
 };
 </script>
