@@ -4,7 +4,7 @@ import { fetchWithAuth } from "~/services/apiHelper";
 
 export const registerUser = async (user: { name: string; email: string; passwordHash: string; role: number }) => {
 	// Correctly access the runtime config
-	const config = useRuntimeConfig();
+	const config = useRuntimeConfig(); // useRuntimeConfig is a hook to access our env variables from the nuxt.config.ts file
 	const url = `${config.public.apiBaseUrl}User/register`; // Make sure the correct value is used
 	console.log("Sending request to:", url);
 
@@ -42,12 +42,6 @@ export const loginUser = async (user: { email: string; password: string }): Prom
 		});
 
 		console.log("Response:", response);
-
-		// Store the JWT token in local storage
-		if (response && response.token) {
-			localStorage.setItem("token", response.token);
-			localStorage.setItem("userId", response.userID.toString());
-		}
 
 		return response;
 	} catch (error) {

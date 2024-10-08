@@ -52,8 +52,8 @@
 					<div v-if="isEditMode"></div>
 
 					<div class="flex">
-						<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-secondary-light hover:bg-secondary-dark text-base rounded-md">Cancel</button>
-						<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-dark text-base-100 rounded-md">{{ isEditMode ? "Update Task" : "Add Task" }}</button>
+						<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-secondary-light hover:bg-secondary-dark text-base rounded-md hover:rounded-none duration-200">Cancel</button>
+						<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-dark text-base-100 rounded-md hover:rounded-none duration-200">{{ isEditMode ? "Update Task" : "Add Task" }}</button>
 					</div>
 				</div>
 			</form>

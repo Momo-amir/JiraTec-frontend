@@ -1,4 +1,3 @@
-// services/commentService.ts
 import { fetchWithAuth } from "~/services/apiHelper";
 import type { IComment } from "~/Interfaces/IComment";
 

@@ -16,9 +16,9 @@
 
 		<div class="flex justify-end mx-10 items-end">
 			<div class="">
-				<button @click="showTaskModal = true" class="mt-4 mx-4 px-4 py-2 bg-primary text-base-100 rounded-md">Add Task</button>
+				<button @click="showTaskModal = true" class="mt-4 mx-4 px-4 py-2 bg-primary text-base-100 rounded-md hover:rounded-none duration-200">Add Task</button>
 
-				<button @click="showUserModal = true" class="mt-4 px-4 py-2 bg-primary text-base-100 rounded-md">Manage Team</button>
+				<button @click="showUserModal = true" class="mt-4 px-4 py-2 bg-primary text-base-100 rounded-md hover:rounded-none duration-200">Manage Team</button>
 			</div>
 		</div>
 

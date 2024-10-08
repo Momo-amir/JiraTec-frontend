@@ -1,4 +1,3 @@
-// stores/projectStore.ts
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getCurrentUserProjects } from "~/services/projectService";

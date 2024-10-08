@@ -39,6 +39,7 @@
 				</tbody>
 			</table>
 		</div>
+		<Modal :isVisible="showModal" @close="showModal = false" />
 	</div>
 </template>
 
@@ -50,6 +51,7 @@ import type { IProject } from "~/Interfaces/IProject";
 // State to store the projects data
 const projects = ref<IProject[]>([]);
 const showOptions = ref<number | null>(null);
+const showModal = ref(false);
 const router = useRouter();
 const authStore = useAuthStore();
 
@@ -104,9 +106,10 @@ const toggleOptions = (projectId: number) => {
 
 // Method to handle project editing
 const editProject = (project: IProject) => {
-	// Trigger your project editing logic here (e.g., open a modal)
 	console.log("Edit project", project);
-	const showModal = ref(false);
+	// Set the project data to edit
+
+	showModal.value = true;
 };
 
 // Method to handle project deletion

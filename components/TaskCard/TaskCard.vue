@@ -6,22 +6,21 @@
 			<p class="text-sm text-base-content" v-if="task.description">{{ task.description }}</p>
 			<p class="text-xs text-base-content/70">Assigned to: {{ assignedUserName }}</p>
 			<p class="text-xs text-base-content/70" v-if="dueDate">Due Date: {{ dueDate }}</p>
+		</div>
+		<div class="flex justify-end mt-2 relative">
+			<!-- Options Button -->
+			<button @click="toggleOptions" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
+			<!-- Options Menu -->
+			<div v-if="showOptions" class="absolute top-4 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg" ref="optionsMenu">
+				<ul>
+					<li>
+						<button @click="$emit('editTask', task)" class="text-xs w-full text-left z-20 px-4 py-2 text-primary hover:text-primary-focus hover:bg-base-200 ease-in duration-200">Edit</button>
+					</li>
 
-			<div class="flex justify-end mt-2 relative">
-				<!-- Options Button -->
-				<button @click="toggleOptions" class="text-primary hover:text-primary-focus bg-inherit hover:bg-base-200 p-1 rounded-full ease-in duration-200">&#x22EE;</button>
-				<!-- Options Menu -->
-				<div v-if="showOptions" class="absolute top-4 right-0 mt-2 w-fit bg-base-100 border border-base-300 rounded-md shadow-lg" ref="optionsMenu">
-					<ul>
-						<li>
-							<button @click="$emit('editTask', task)" class="text-xs w-full text-left px-4 py-2 text-primary hover:text-primary-focus hover:bg-base-200 ease-in duration-200">Edit</button>
-						</li>
-
-						<li>
-							<button @click="() => deleteTask(props.task.taskID)" class="text-error hover:text-error-focus text-xs w-full text-left px-4 py-2 hover:bg-base-200 ease-in duration-200">Delete</button>
-						</li>
-					</ul>
-				</div>
+					<li>
+						<button @click="() => deleteTask(props.task.taskID)" class="text-error hover:text-error-focus text-xs w-full text-left px-4 py-2 hover:bg-base-200 ease-in duration-200">Delete</button>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>

@@ -16,7 +16,7 @@
 import { useAuthStore } from "~/stores/auth";
 
 const authStore = useAuthStore();
-const currentUser = computed(() => authStore.user?.name || "Guest");
+const currentUser = computed(() => authStore.user?.name || "How did you get here?");
 
 const frontPageTitle = computed(() => `Welcome to the Project Management App, ${currentUser.value}`);
 const frontPageDescription = ref<string>("This is a simple project management app built with Nuxt3 and Tailwind CSS to help you manage your projects with ease. Get started by creating a new project or viewing your existing projects.");

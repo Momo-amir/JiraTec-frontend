@@ -115,3 +115,30 @@ export const deleteProject = async (projectId: number): Promise<void> => {
 		throw error;
 	}
 };
+
+export const updateProject = async (projectId: number, updatedProject: IProject): Promise<IProject> => {
+	const config = useRuntimeConfig();
+	const url = `${config.public.apiBaseUrl}Project/${projectId}`;
+
+	const payload = {
+		projectID: updatedProject.projectID,
+		title: updatedProject.title,
+		description: updatedProject.description,
+	};
+
+	try {
+		const response = await fetchWithAuth(url, {
+			method: "PUT",
+			body: JSON.stringify(payload),
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+		});
+
+		return response as IProject;
+	} catch (error) {
+		console.error(`Error updating project with ID ${projectId}:`, error);
+		throw error;
+	}
+};

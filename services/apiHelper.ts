@@ -21,3 +21,8 @@ export const fetchWithAuth = async (url: string, options: any = {}) => {
 		throw error;
 	}
 };
+// FetchWithAuth makes sure that the token is included in the request headers.
+//This is a common pattern for APIs that require authentication.
+//The token is retrieved from local storage and added to the Authorization header.
+//The function also merges any headers provided in the options parameter with the authentication headers.
+// This allows for flexibility in customizing the request headers.

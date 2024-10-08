@@ -1,9 +1,9 @@
 <template>
 	<div v-if="isVisible" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-		<div class="bg-base-100 p-6 rounded-lg shadow-lg w-1/3">
+		<div class="bg-base-100 z-[999] p-6 rounded-lg shadow-lg w-1/3">
 			<header class="flex justify-between items-center mb-4">
 				<h2 class="text-xl font-semibold text-base-content">Add New Project</h2>
-				<button @click="closeModal" class="text-base-content hover:text-base-content/70">&times;</button>
+				<button @click="closeModal" class="text-base-content hover:text-base-content/70 hover:rounded-none duration-200">&times;</button>
 			</header>
 
 			<!-- Form for adding a new project -->
@@ -18,8 +18,8 @@
 				</div>
 
 				<div class="flex justify-end">
-					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-base-300 hover:bg-base-400 rounded-md">Cancel</button>
-					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-focus text-base-content rounded-md">Add Project</button>
+					<button type="button" @click="closeModal" class="mr-2 py-2 px-4 bg-base-300 hover:bg-base-400 rounded-md hover:rounded-none duration-200">Cancel</button>
+					<button type="submit" class="py-2 px-4 bg-primary hover:bg-primary-focus text-base-100 rounded-md hover:rounded-none duration-200">Add Project</button>
 				</div>
 			</form>
 		</div>

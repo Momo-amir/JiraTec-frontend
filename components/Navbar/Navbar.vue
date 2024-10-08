@@ -16,10 +16,10 @@
 						</li>
 						<li>
 							<!-- Button to open the modal -->
-							<button @click="showModal = true" class="py-2 px-4 bg-accent text-base-100 rounded-md">Add New Project</button>
+							<button @click="showModal = true" class="py-2 px-4 bg-accent text-base-100 rounded-md hover:rounded-none duration-200">Add New Project</button>
 						</li>
 						<li>
-							<button @click="logoutUser" class="py-2 px-4 bg-error text-base-100 rounded-md">Logout</button>
+							<button @click="logoutUser" class="py-2 px-4 bg-error text-base-100 rounded-md hover:rounded-none duration-200">Logout</button>
 						</li>
 					</ul>
 				</div>
